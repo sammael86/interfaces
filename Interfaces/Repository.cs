@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace ConsoleApp1
+namespace Interfaces
 {
     public class Repository : IRepository<Account>
     {
@@ -42,8 +42,7 @@ namespace ConsoleApp1
 
         public IEnumerable<Account> GetAll()
         {
-            foreach (var account in accounts)
-                yield return account;
+            return accounts;
         }
 
         public Account GetOne(Func<Account, bool> predicate)

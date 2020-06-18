@@ -1,15 +1,16 @@
 using NUnit.Framework;
-using ConsoleApp1;
+using Interfaces;
 using Moq;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
-namespace NUnitTestProject1
+namespace TestAccountService
 {
-    public class Tests
+    public class TestAddAccount
     {
         [Test]
-        public void Test1()
+        public void TestAddAccountFailed()
         {
             var repository = new Mock<IRepository<Account>>();
             IAccountService accountService = new AccountService(repository.Object);
@@ -22,7 +23,7 @@ namespace NUnitTestProject1
         }
 
         [Test]
-        public void Test2()
+        public void TestAddAccountSuccessful()
         {
             var repository = new Mock<IRepository<Account>>();
             IAccountService accountService = new AccountService(repository.Object);
@@ -31,7 +32,7 @@ namespace NUnitTestProject1
             {
                 accountService.AddAccount(account);
             }
-            repository.Verify(x => x.Add(It.IsAny<Account>()), Times.Exactly(2));
+            repository.Verify(x => x.Add(It.IsAny<Account>()), Times.Exactly(accounts.Count(x => x.Value == true)));
         }
 
         Dictionary<Account, bool> accounts = new Dictionary<Account, bool>
@@ -47,22 +48,9 @@ namespace NUnitTestProject1
 
         private IEnumerable<Account> GetAccounts(bool onlyCorrect)
         {
-            foreach (var account in accounts)
+            foreach (var account in accounts.Where(x => x.Value == onlyCorrect))
             {
-                if (onlyCorrect)
-                {
-                    if (account.Value)
-                    {
-                        yield return account.Key;
-                    }
-                }
-                else
-                {
-                    if (!account.Value)
-                    {
-                        yield return account.Key;
-                    }
-                }
+                yield return account.Key;
             }
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
-namespace ConsoleApp1
+namespace Interfaces
 {
     class Program
     {
@@ -45,7 +45,7 @@ namespace ConsoleApp1
             Debug.WriteLine("\r\nSorted:");
 
             IAlgorithm<Person> algorithm = new PersonAlgorithms();
-            foreach (var item in algorithm.Sort<Person>(deserializedPersons))
+            foreach (var item in algorithm.Sort(deserializedPersons))
             {
                 Debug.WriteLine($"Name - {item.Name}, Age - {item.Age}");
             }

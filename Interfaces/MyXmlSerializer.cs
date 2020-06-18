@@ -2,7 +2,7 @@
 using ExtendedXmlSerializer;
 using ExtendedXmlSerializer.Configuration;
 
-namespace ConsoleApp1
+namespace Interfaces
 {
     public class MyXmlSerializer : ISerializer
     {

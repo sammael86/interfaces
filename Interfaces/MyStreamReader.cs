@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ConsoleApp1
+namespace Interfaces
 {
     public class MyStreamReader<T> : IEnumerable<T>, IDisposable
     {
