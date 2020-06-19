@@ -48,10 +48,7 @@ namespace TestAccountService
 
         private IEnumerable<Account> GetAccounts(bool onlyCorrect)
         {
-            foreach (var account in accounts.Where(x => x.Value == onlyCorrect))
-            {
-                yield return account.Key;
-            }
+            return accounts.Where(x => x.Value == onlyCorrect).Select(x => x.Key);
         }
     }
 }
